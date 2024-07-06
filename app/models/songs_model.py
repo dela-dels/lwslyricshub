@@ -22,8 +22,8 @@ class SongRead(SongBase):
     uuid: str
     title: str
     content: str
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
     created_at: datetime = Field(default_factory=datetime.utcnow)
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
 
 
 class SongUpdate(SQLModel):
@@ -35,11 +35,11 @@ class SongUpdate(SQLModel):
 
 class Song(SongBase, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
-    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    uuid: str = Field(default=str(uuid.uuid4()), index=True, nullable=False)
     title: str
-    uuid: str = Field(default=str(uuid.uuid4()), index=True)
     content: str
+    updated_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=datetime.utcnow)
 
     class Config:
         orm_mode = True

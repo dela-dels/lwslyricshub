@@ -2,14 +2,13 @@ from fastapi import HTTPException, Depends
 from typing import List
 from sqlmodel import Session
 from app.core.database import get_session
-from app.models.songs_model import Song, SongUpdate, SongCreate
+from app.models.songs_model import Song, SongUpdate, SongCreate, SongRead
 
 
 class SongsController:
     @staticmethod
     def get_songs(session: Session = Depends(get_session)) -> List[Song]:
         return session.query(Song).all()
-        # return session.query(Song).all()
 
     @staticmethod
     def get_song(song_id: int, session: Session = Depends(get_session)) -> Song:
