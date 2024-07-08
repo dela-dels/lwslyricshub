@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 from sqlmodel import SQLModel, Field
 from sqlalchemy import Column
 
-load_dotenv()
-
 
 class SongBase(SQLModel):
     title: str

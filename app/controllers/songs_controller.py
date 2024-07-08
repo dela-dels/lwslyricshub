@@ -10,6 +10,14 @@ class SongsController:
     def get_songs(session: Session = Depends(get_session)) -> List[Song]:
         return session.query(Song).all()
 
+    # sample implementation of how to get a db resource using the uuid instead of the primary key
+    # @staticmethod
+    # def get_user_by_uuid(uuid: str, session: Session = Depends(get_session)) -> UserRead:
+    #     user = session.exec(select(User).where(User.uuid == uuid)).first()
+    #     if user is None:
+    #             raise HTTPException(status_code=404, detail="User not found")
+    #         return UserRead.from_orm(user)
+
     @staticmethod
     def get_song(song_id: int, session: Session = Depends(get_session)) -> Song:
         song = session.get(Song, song_id)
